@@ -1,0 +1,109 @@
+html{
+    font-size: 30px;
+}
+ul{
+    width: 100%;
+    height: auto;
+    overflow: scroll;
+    margin: 0 auto;
+    .pubcard:nth-child(2n-1){
+        margin: 0 3%;
+        margin-top: 5%;
+    }
+}
+.card{
+    width: 45%;
+    padding-top: 67.5%;
+    float: left;
+    position: relative;
+    background-color: white;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    .img{
+        width: 100%;
+        height: 70%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        img{
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+    }
+    .text{
+        width: 100%;
+        height: 30%;
+        position: absolute;
+        top: 70%;
+        left: 0;
+        padding: 0 5%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        .quan{
+            width: 30%;
+            height: 20%;
+            line-height: 20%;
+            bottom: .03rem;
+            right: .03rem;
+            padding: .03rem .08rem 0;
+            font-size: .27rem;
+            line-height: .5rem;
+            text-align: center;
+            color: #fa585a;
+            border-radius: .05rem;
+            box-shadow: inset 0 0 0 0.03rem #fa585a;
+            vertical-align: bottom;
+            align-self: flex-end;
+            // margin-right: 8%;
+        }
+        .title{
+            overflow: hidden;
+            font-size: .32rem;
+            line-height: .48rem;
+            text-overflow: ellipsis;
+            color: #877a73;
+            white-space: nowrap;
+        }
+        .more{
+            box-sizing: content-box;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            span:nth-of-type(1){
+                font-size: .53rem;
+                line-height: .4rem;
+                color: #fa585a;
+            }
+            span:nth-of-type(2){
+                font-size: .27rem;
+                color: #877a73;
+                letter-spacing: 0;
+            }
+        }
+    }
+}
+.onlycard{
+    width: 45%;
+    height: 0;
+    padding-top: 70%;
+    position: relative;
+    margin-top: 5%;
+    float: left;
+    .onlyimg{
+        width: 100%;
+        height: 100%; 
+        padding-top: 70%;
+        img{
+            width: 100%;
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    }
+}
