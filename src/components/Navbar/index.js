@@ -8,27 +8,27 @@ import './navbar.less'
 const mapStateToProps = (state)=>{
   return{
     pageTitle:state.show.pageTitle,
-    // isSubpage: state.show.isSubpage
+    isSubpage: state.show.isSubpage
   }
 }
 
-// @withRouter
-// @connect(mapStateToProps)
+@withRouter
+@connect(mapStateToProps)
 
-class Nav extends Component {
+export default class index extends Component {
   render() {
-    // const navBarProps = {};
-    //  if(this.props.isSubpage) {
-    //   navBarProps.onLeftClick = this.props.history.goBack.bind(this)
-    // }
+    const navBarProps = {};
+     if(this.props.isSubpage) {
+      navBarProps.onLeftClick = this.props.history.goBack.bind(this)
+    }
     return (
       <Fragment>
       <NavBar
       mode="light"
-      // icon={<Icon 
-      //   onClick = {this.props.history.goBack.bind(this)}
-      //   type="left" 
-      //   />}
+      icon={<Icon 
+        onClick = {this.props.history.goBack.bind(this)}
+        type="left" 
+        />}
       rightContent={[
         <Icon key="1" type="ellipsis" />,
       ]}
@@ -39,4 +39,3 @@ class Nav extends Component {
     )
   }
 }
-export default withRouter(connect(mapStateToProps,{})(Nav))

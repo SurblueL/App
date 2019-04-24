@@ -22,16 +22,11 @@ const Detail = Loadable({
     loader:()=>import("./Detail"),
     loading:Loading,
 });
-const Seach = Loadable({
-    loader:()=>import("./Seach"),
-    loading:Loading,
-});
 
 export {
     Home,
     Mall,
     Cart,
     Mine,
-    Detail,
-    Seach
+    Detail
 }

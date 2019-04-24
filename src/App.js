@@ -13,7 +13,7 @@ import {
 import './app.less';
 import './style/index.less';
 
-require('./style/iconfonts/iconfont.js');
+import './style/iconfonts/iconfont.js';
 
 
 
@@ -41,9 +41,7 @@ render(){
             {
               routes.map(route =>{
                 return(
-                  <Route 
-                  cache='root'
-                          key={route.path} 
+                  <Route key={route.path} 
                           path={route.path}
                           component={route.component}
                   />

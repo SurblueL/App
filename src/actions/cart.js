@@ -8,6 +8,7 @@ export const cartReduce = (id) => {
 }
 
 export const cartAdd = (id) => {
+  console.log(id)
   return {
     type: actionType.CART_ADD,
     id
@@ -19,5 +20,13 @@ export const addToCart = (list) => {
   return {
     type: actionType.ADD_TO_CART,
     list
+  }
+}
+
+export const countInputChange = (id, count) => {
+  return {
+    type: actionType.COUNT_INPUT_CHANGE,
+    id,
+    count
   }
 }

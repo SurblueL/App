@@ -1,12 +1,27 @@
 import React, { Component } from 'react'
 import { Checkbox } from 'antd-mobile'
 import { connect } from 'react-redux'
-import { cartAdd, cartReduce } from '../../actions/cart'
+import { cartAdd, cartReduce, countInputChange } from '../../actions/cart'
 import './items.less'
 
 const CheckboxItem = Checkbox.CheckboxItem
 // @connect(null, { cartAdd, cartReduce })
 class CartItem extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      count:  this.props.count && this.props.count || 0
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps) {
+      this.setState({
+        count: nextProps.count || 0
+      })
+    }
+  }
 
   add = (id) => {
     console.log(id)
@@ -14,7 +29,28 @@ class CartItem extends Component {
   }
 
   reduce = (id) => {
-    this.props.cartAdd && this.props.cartAdd(id)
+    this.props.cartReduce && this.props.cartReduce(id)
+  }
+
+  countChange = (e, status, id) => {
+    this.props.cartCountChange && this.props.cartCountChange()
+    switch (status) {
+      case 'add':
+      this.props.cartAdd && this.props.cartAdd(id)
+        break;
+      
+      case 'reduce':
+      this.props.cartReduce && this.props.cartReduce(id)
+        break;
+
+      case 'input':
+      console.log(e.target.value)
+      this.setState({
+        count: parseInt(e.target.value)
+      })
+      this.props.countInputChange && this.props.countInputChange(id, parseInt(e.target.value))
+        break;
+    }
   }
 
   checKItem = (e, id) => {
@@ -22,15 +58,11 @@ class CartItem extends Component {
     this.props.onCheckOut && this.props.onCheckOut(id, e.target.checked, id)
   }
 
-  inputChange() {
-    console.log(111)
-  }
-
   render() {
     const {
       id,
       price,
-      count,
+      // count,
       photo,
       title,
       checked
@@ -47,9 +79,9 @@ class CartItem extends Component {
             <div className="price_option">
               <span className="price">¥{price}</span>
               <div className="count">
-                <span onClick={this.reduce.bind(this, id)} className="btn-option">-</span>
-                <input className="btn-counter" value={count} onChange={this.inputChange}/>
-                <span onClick={this.add.bind(this, id)} className="btn-option">+</span>
+                <span onClick={(e) => this.countChange(e, 'reduce', id)} className="btn-option">-</span>
+                <input className="btn-counter" value={this.state.count} onChange={(e) => this.countChange(e, 'input', id)}/>
+                <span onClick={(e) => this.countChange(e, 'add', id)} className="btn-option">+</span>
               </div>
             </div>
 
@@ -60,4 +92,4 @@ class CartItem extends Component {
     )
   }
 }
-export default connect(null, { cartAdd, cartReduce })(CartItem)
+export default connect(null, { cartAdd, cartReduce, countInputChange })(CartItem)

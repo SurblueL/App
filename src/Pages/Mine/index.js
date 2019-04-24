@@ -11,33 +11,33 @@ class Mall extends Component {
         {
           path: "/MyOrder",
           title: "我的订单",
-          icon: "icon-dingdan",
+          icon: "#icon-dingdan",
         }, {
           path: "/MyAddress",
           title: "我的收货地址",
-          icon: "icon-weizhi",
+          icon: "#icon-weizhi",
         }, {
           path: "/MyBrowsing",
           title: "浏览历史",
-          icon: "icon-xiaoxi",
+          icon: "#icon-xiaoxi",
         }, {
           path: "/MyCollect",
           title: "我的收藏",
-          icon: "icon-shoucang",
+          icon: "#icon-shoucang",
         }, {
           path: "/MySetting",
           title: "设置",
-          icon: "icon-shezhi",
+          icon: "#icon-shezhi",
         }, {
           path: "/About",
           title: "关于",
-          icon: "icon-bangzhu",
+          icon: "#icon-bangzhu",
         }
       ]
     }
   }
   componentDidMount() {
-    this.props.hiddenNavOrBar(false,true)
+    this.props.hiddenNavOrBar(false)
   }
   componentWillUnmount() {
     this.props.hiddenNavOrBar(1)
@@ -53,8 +53,11 @@ class Mall extends Component {
       return (
         <li className="subpage_item" key={item.path} onClick={this.toSubpage.bind(this, item.path)}>
           <i className={`iconfont ${item.icon}`} ></i>
+          <svg class="iconfont" aria-hidden="true">
+            <use href={item.icon}></use>
+          </svg>
           <span >{item.title}</span>
-          <i className="iconfont tosubpage">&#xe633;</i>
+          <i class="iconfont tosubpage">&#xe633;</i>
         </li>
       )
     })

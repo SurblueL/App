@@ -37,7 +37,11 @@ export default (state = initState, action) => {
 
     case actionType.CART_REDUCE:
       const newList = state.list.reduce((result, item) => {
+        console.log('剑法', result, item)
         if (item.id === action.id) {
+          if (item.count <= 0) {
+            return
+          }
           item.count = item.count - 1;
         }
         if (item.count > 0) {
@@ -62,7 +66,17 @@ export default (state = initState, action) => {
         list: newAddList
       });
 
-
+      case actionType.COUNT_INPUT_CHANGE: 
+      const inputValue = state.list.map(item => {
+        if (item.id === action.id) {
+          item.count = action.count;
+        }
+        return item;
+      })
+      syncCartStorage(inputValue);
+      return Object.assign({}, state, {
+        list: inputValue
+      });
     default:
       return state;
   }
