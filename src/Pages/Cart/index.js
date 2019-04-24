@@ -6,6 +6,9 @@ import Item from './items'
 import './index.less'
 
 const CheckboxItem = Checkbox.CheckboxItem
+const syncCartStorage = (carlist) => {
+  window.localStorage.setItem('mycart', JSON.stringify(carlist))
+}
 const mapState = state => {
   return {
     list: state.cart.list
@@ -18,7 +21,8 @@ class Mall extends Component {
     this.state = {
       countTatol: 0,
       checKAll:false,
-      cartData: ""
+      cartData: "",
+      totalPrice: 0
     };
   }
   componentDidMount() {
@@ -41,29 +45,51 @@ class Mall extends Component {
 
   checKAll = (e)=>{
     const checKAll = e.target.checked
-    console.log('checKAll', checKAll)
-    this.setState({ checKAll })
+    const { cartData = [] } = this.state
+    for (const item of cartData) {
+        item['checked'] = checKAll
+    }
+    syncCartStorage(cartData)  
+    this.setState({
+      cartData,
+      checKAll
+    })
   }
 
   onCheckOut = (id, status) => {
     console.log(id, status, this)
-    const { cartData = [] } = this.state
+    let { cartData = [] } = this.state
+    let checKAll = true
     for (const item of cartData) {
       if(item['id'] == id) {
         item['checked'] = status
       }
     }
-       
+
+    for (const item of cartData) {
+      if (!item['checked']) {
+        checKAll = false
+      }
+    }
+    syncCartStorage(cartData)  
     this.setState({
-      cartData: cartData
+      cartData,
+      checKAll
     })
   }
 
   render() {
     console.log('this.state.cartData', this.state.cartData)
     console.log('this.props', this.props)
-    const { countTatol, checKAll, cartData} = this.state
-    console.log('cartData', cartData)
+    let { countTatol, checKAll, cartData} = this.state
+    let totalPrice = 0;
+    if (cartData && cartData.length) {
+      for (const item of cartData) {
+        if (item['checked']) {
+          totalPrice = Number(Number(totalPrice) + (item['count'] * item['price'])).toFixed(2)
+        }
+      }
+    }
     return (
       <div className="cart_box">
         <div className="cart_top">
@@ -79,10 +105,10 @@ class Mall extends Component {
           }
         </ul>
         <div className="fixed_footer">
-          <CheckboxItem className="check_box_item" onChange={this.checKAll} checked={checKAll}>全选</CheckboxItem>
+          <CheckboxItem cartCountChange={() => this.countChange()} className="check_box_item" onChange={this.checKAll} checked={checKAll}>全选</CheckboxItem>
           <div className="foot_right">
-            <span>合计：<span>¥ 43434344</span></span>
-            <div className="total">结算(0)</div>
+            <span>合计：<span>¥ {totalPrice}</span></span>
+            <div className="total">结算</div>
           </div>
         </div>
       </div>

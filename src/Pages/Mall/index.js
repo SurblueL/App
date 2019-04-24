@@ -50,7 +50,7 @@ class Mall extends Component {
       Api.getCategoryLIstById(this.state.currentCategoryId)
         .then(resp => {
           this.setState({
-            list: resp.data.data.items.list,
+            list: resp.data.data.items,
           })
         })
     })
@@ -69,7 +69,7 @@ class Mall extends Component {
     Api.getCategoryLIstById(id)
       .then(res => {
         this.setState({
-          list: res.data.items.list
+          list: res.data.items
         })
       })
   }

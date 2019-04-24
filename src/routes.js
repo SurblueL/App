@@ -3,8 +3,7 @@ import{
         Mall,
         Cart,
         Mine,
-        Detail,
-        Seach
+        Detail
 } from "./Pages"
 import{
         About,
@@ -67,11 +66,6 @@ const routes= [{
         // title:"关于",
         // icon:"&#xe604;",
         component:About
-    },{
-        path:"/seach",
-        // title:"关于",
-        // icon:"&#xe604;",
-        component:Seach
     }]
 
 export default routes;

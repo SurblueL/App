@@ -28,7 +28,7 @@ import './index.less'
     };
   }
   componentDidMount(){
-    this.props.hiddenNavOrBar(false,false);
+    this.props.hiddenNavOrBar(0,0);
     const proid = this.props.match.params.id;
     Api.getDetail(proid)
       .then(resp => {
@@ -47,7 +47,6 @@ import './index.less'
   }
   componentWillUnmount() {
     this.props.toggleIsSubpage && this.props.toggleIsSubpage();
-    this.props.hiddenNavOrBar(true,true)
   }
   render() {
     return (

@@ -8,7 +8,8 @@ class HomeList extends Component {
     this.props.history.push(`/detail/${id}`)
   }
   render() {
-    const list = this.props.list||[];
+    const list = this.props.list.list||[];
+    // console.log(this.props.list)
     return (
       <ul>
        {list.map(item => (
@@ -26,6 +27,7 @@ class HomeList extends Component {
                         <div></div>
 
                       }
+                      {/*  <div className = "quan">{item.couponValue}</div> */}
                       <div className = "more">
                           <span>￥{item.originPrice}</span>
                           {
@@ -34,6 +36,8 @@ class HomeList extends Component {
                             :
                             <span>{item.saleNum}人已买</span>
                           }
+                          {/* <span>{item.saleNum}人已买</span> */}
+                          {/* <span>{item.couponValue}</span> */}
                       </div>
                   </div>
             </li>

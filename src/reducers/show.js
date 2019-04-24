@@ -24,12 +24,6 @@ const initState = {
         ...state,
         isShowTab: action.isShowTab
       };
-      case actionType.HIDDEN_BOTH:
-      return {
-        ...state,
-        isShowNav: action.isShowNav,
-        isShowTab: action.isShowTab
-      };
       default:
         return state;
     }
