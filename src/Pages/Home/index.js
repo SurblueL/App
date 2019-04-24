@@ -3,6 +3,7 @@ import {
   Swiper,
   Listdom
 } from '../../components'
+import { withRouter } from 'react-router-dom'
 import Api from '../../utils/Api'
 import { SearchBar} from 'antd-mobile'
 import{ connect } from "react-redux"
@@ -28,18 +29,22 @@ class Home extends Component {
       const {banners,items} = resp.data
       this.setState({
           listimg:banners,
-          list: items
+          list: items.list
       })
     })
   }
+  toSeach =()=>{
+    this.props.history.push(`/seach/`)
+  }
+
   render() {
     return (
       <div>
-        <SearchBar placeholder="Search" maxLength={8} />
+        <SearchBar placeholder="搜索" maxLength={8} onFocus={this.toSeach}/>
         <Swiper list = {this.state.listimg} />
         <Listdom list = {this.state.list}/>
       </div>
     )
   }
 }
-export default connect(null,{changeUiTitle})(Home)
+export default withRouter(connect(null,{changeUiTitle})(Home))

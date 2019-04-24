@@ -7,24 +7,24 @@ export const changeUiTitle = (title) => {
   }
 }
 
-// export const toggleIsSubpage = (isSubpage = false) => {
-//   return {
-//     type: actionType.TOGGLE_IS_SUBPAGE,
-//     isSubpage
-//   }
-// }
-
 export const hiddenNavOrBar = (isShowNav = true,isShowTab = true) => {
   return {
-    type: actionType.HIDDEN_NAV,
+    type: actionType.HIDDEN_BOTH,
     isShowNav,
     isShowTab
   }
 }
 
-// export const hiddenTab = (isShowTab = true) => {
-//   return {
-//     type: actionType.HIDDEN_TAB,
-//     isShowTab
-//   }
-// }
+export const hiddenNav = (isShowNav = false) => {
+  return {
+    type: actionType.HIDDEN_TAB,
+    isShowNav
+  }
+}
+
+export const HIDDEN_NAV = (isShowTab = true) => {
+  return {
+    type: actionType.HIDDEN_TAB,
+    isShowTab
+  }
+}

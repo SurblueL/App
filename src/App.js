@@ -41,7 +41,9 @@ render(){
             {
               routes.map(route =>{
                 return(
-                  <Route key={route.path} 
+                  <Route 
+                  cache='root'
+                          key={route.path} 
                           path={route.path}
                           component={route.component}
                   />

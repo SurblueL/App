@@ -37,7 +37,7 @@ class Mall extends Component {
     }
   }
   componentDidMount() {
-    this.props.hiddenNavOrBar(false)
+    this.props.hiddenNavOrBar(false,true)
   }
   componentWillUnmount() {
     this.props.hiddenNavOrBar(1)
@@ -54,7 +54,7 @@ class Mall extends Component {
         <li className="subpage_item" key={item.path} onClick={this.toSubpage.bind(this, item.path)}>
           <i className={`iconfont ${item.icon}`} ></i>
           <span >{item.title}</span>
-          <i class="iconfont tosubpage">&#xe633;</i>
+          <i className="iconfont tosubpage">&#xe633;</i>
         </li>
       )
     })
