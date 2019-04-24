@@ -17,13 +17,16 @@ class Mall extends Component {
     super();
     this.state = {
       countTatol: 0,
-      checKAll:false
-
+      checKAll:false,
+      cartData: ""
     };
   }
   componentDidMount() {
     // console.log(this.props)
-    this.props.changeUiTitle("购物车")
+    this.setState({
+      cartData: this.props.list || []
+    })
+    this.props.changeUiTitle && this.props.changeUiTitle("购物车")
     this.calculate()
   }
 
@@ -38,13 +41,29 @@ class Mall extends Component {
 
   checKAll = (e)=>{
     const checKAll = e.target.checked
-    this.setState({checKAll})
+    console.log('checKAll', checKAll)
+    this.setState({ checKAll })
+  }
+
+  onCheckOut = (id, status) => {
+    console.log(id, status, this)
+    const { cartData = [] } = this.state
+    for (const item of cartData) {
+      if(item['id'] == id) {
+        item['checked'] = status
+      }
+    }
+       
+    this.setState({
+      cartData: cartData
+    })
   }
 
   render() {
-    // console.log(this.props)
-    const list = this.props.list;
-    const { countTatol,checKAll } = this.state
+    console.log('this.state.cartData', this.state.cartData)
+    console.log('this.props', this.props)
+    const { countTatol, checKAll, cartData} = this.state
+    console.log('cartData', cartData)
     return (
       <div className="cart_box">
         <div className="cart_top">
@@ -53,9 +72,9 @@ class Mall extends Component {
         </div>
         <ul className="mycart">
           {
-            list.map(cart => {
+            cartData && cartData.map(cart => {
               // console.log(list)
-              return <Item key={cart.id} {...cart} checKAll={checKAll} />
+              return <Item key={cart.id} {...cart} onCheckOut={this.onCheckOut}/>
             })
           }
         </ul>
